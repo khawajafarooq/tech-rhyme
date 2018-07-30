@@ -125,4 +125,24 @@ func rightRotationMod<T>(_ array:[T], d: Int) -> [T] {
     return result
 }
 
+// shuffle an array
+func shuffle<T:Comparable>(_ a:[T]) -> [T] {
+    var array = a
+    guard !array.isEmpty else { return array }
+    
+    // loop throughout the array
+    // get random index
+    // swap current index with random index
+    var last = array.count - 1
+    while (last > 0) {
+        let rand = Int(arc4random_uniform(UInt32(last)))
+        array.swapAt(last, rand)
+        last -= 1
+    }
+    
+    return array
+}
+
+//shuffle(["A", "B", "C", "D", "F", "M", "P"])
+//shuffle([1,4,3,6,8,10])
 //: [Next](@next)
