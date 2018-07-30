@@ -145,4 +145,30 @@ func shuffle<T:Comparable>(_ a:[T]) -> [T] {
 
 //shuffle(["A", "B", "C", "D", "F", "M", "P"])
 //shuffle([1,4,3,6,8,10])
+
+// Find two maximum from array
+func findTwoMax(_ array: [Int]) -> (Int, Int)? {
+    guard array.count > 1 else {
+        return nil
+    }
+    
+    var max = Int.min
+    var secondMax = Int.min
+    
+    for i in 0..<array.count {
+        
+        if max < array[i] {
+            secondMax = max
+            max = array[i]
+        }
+        else if secondMax < array[i] {
+            secondMax = array[i]
+        }
+    }
+    
+    return (max, secondMax)
+}
+
+//findTwoMax([1,12,3,7,6,5,8,14])
 //: [Next](@next)
+
