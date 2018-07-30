@@ -52,5 +52,25 @@ func duplicate(_ array: [Int], _ k: Int) -> Int {
 
 //duplicate([0,1,2,5,3,1,1,1,3], 4)
 
+// Reverse an array
+// Input: A = [2, 6, 3, 1, 7]
+// Output: A = [7, 1, 3, 6, 2]
+
+func reverser<T>(_ array: [T]) throws -> [T] {
+    
+    guard array.count > 1 else { return array }
+    
+    var result: [T] = []
+    var index = array.count-1
+    
+    while index >= 0 {
+        result.append(array[index])
+        index -= 1
+    }
+    
+    return result
+}
+
+//reverser(A)
 
 //: [Next](@next)
