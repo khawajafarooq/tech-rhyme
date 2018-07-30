@@ -73,4 +73,56 @@ func reverser<T>(_ array: [T]) throws -> [T] {
 
 //reverser(A)
 
+// Array left rotation
+// Input: A = [2, 6, 3, 1, 7], d = 2
+// Output: A = [3, 1, 7, 2, 6]
+
+func leftRotation<T>(_ array:[T], d: Int) -> [T] {
+    var result: [T] = []
+    
+    array.forEach { _ in
+        let element = result.remove(at: 0)
+        result.append(element)
+    }
+    
+    return result
+}
+
+// Rotation with index
+// expected index: 2, 3, 4, 0, 1
+// index = d + i % size
+// 2, 3, 4, 0, 1
+func leftRotationMod<T>(_ array:[T], d: Int) -> [T] {
+    var result: [T] = []
+    
+    for i in 0..<array.count {
+        let index = d + i % array.count
+        result[i] = array[index]
+    }
+    
+    return result
+}
+
+//leftRotation(A, d: 2)
+
+// Array right rotation
+// Input: A = [2, 6, 3, 1, 7], d = 2
+// Output: A = [1, 7, 2, 6, 3]
+
+// Rotation with index
+// expected index: 3, 4, 0, 1, 2
+// index = d + i + 1 % size
+// 3, 4, 0, 1, 2
+
+func rightRotationMod<T>(_ array:[T], d: Int) -> [T] {
+    var result: [T] = []
+    
+    for i in 0..<array.count {
+        let index = (d + i + 1) % array.count
+        result.append(array[index])
+    }
+    
+    return result
+}
+
 //: [Next](@next)
