@@ -125,6 +125,8 @@ func rightRotationMod<T>(_ array:[T], d: Int) -> [T] {
     return result
 }
 
+//rightRotationMod(A, d: 2)
+
 // shuffle an array
 func shuffle<T:Comparable>(_ a:[T]) -> [T] {
     var array = a
@@ -170,5 +172,54 @@ func findTwoMax(_ array: [Int]) -> (Int, Int)? {
 }
 
 //findTwoMax([1,12,3,7,6,5,8,14])
+
+
+// Add a number to array
+/* Test Cases
+ Input: [1, 2, 3, 4]
+ Output: [1, 2, 3, 5]
+ 
+ Input: [1, 2, 9, 9]
+ Output: [1, 3, 0, 0]
+ 
+ Input: [9, 9, 9, 9]
+ Output: [1, 0, 0, 0]
+ 
+ Input: []
+ Output: [1]
+ */
+
+// if 9 then carry
+// otherwise add 1
+// if complete number is greater than add array
+func addOneNumber(_ array: [Int]) -> [Int] {
+    
+    // if empty input
+    guard !array.isEmpty else { return [1] }
+    
+    var carry = 1
+    var result: [Int] = array.reversed().map {
+        let sum = $0 + carry
+        
+        if sum == 10 {
+            carry = 1
+            return 0
+        } else {
+            carry = 0
+            return sum
+        }
+    }
+    // Corner Case:
+    // if all of the values are 9
+    if carry != 0 {
+        result.append(carry)
+    }
+    
+    return result.reversed()
+}
+
+//A = [1, 2, 9, 9]
+//addOneNumber([9,9,9,9,1,2])
+
 //: [Next](@next)
 
