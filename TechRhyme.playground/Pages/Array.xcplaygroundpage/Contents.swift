@@ -107,7 +107,7 @@ func leftRotationMod<T>(_ array:[T], d: Int) -> [T] {
     return result
 }
 
-//leftRotation(A, d: 2)
+leftRotation(A, d: 2)
 
 // Array right rotation
 // Input: A = [2, 6, 3, 1, 7], d = 2
@@ -141,7 +141,7 @@ func shuffle<T:Comparable>(_ a:[T]) -> [T] {
     // swap current index with random index
     var last = array.count - 1
     while (last > 0) {
-        let rand = Int(arc4random_uniform(UInt32(last)))
+        let rand = Int.random(in: 0..<last)
         array.swapAt(last, rand)
         last -= 1
     }
@@ -150,7 +150,11 @@ func shuffle<T:Comparable>(_ a:[T]) -> [T] {
 }
 
 //shuffle(["A", "B", "C", "D", "F", "M", "P"])
-//shuffle([1,4,3,6,8,10])
+shuffle([1,4,3,6,8,10])
+
+
+var m = [1,4,3,6,8,10]
+m.shuffle() // swift 4.2
 
 // Find two maximum from array
 func findTwoMax(_ array: [Int]) -> (Int, Int)? {
