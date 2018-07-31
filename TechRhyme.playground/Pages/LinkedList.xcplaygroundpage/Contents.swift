@@ -2,7 +2,7 @@
 
 import Foundation
 
-class Node<T> {
+class Node<T: Comparable> {
     let data: T
     var next: Node? = nil
     
@@ -11,7 +11,7 @@ class Node<T> {
     }
 }
 
-struct LinkedList<T> {
+struct LinkedList<T: Comparable> {
     
     var head: Node<T>?
     
@@ -28,17 +28,36 @@ struct LinkedList<T> {
     }
     
     mutating func append(_ node: Node<T>) {
-        
-        guard let start = head else {
-            self.head = node
-            return
-        }
-        
-        var current = start
+        var current = head!
         while (current.next != nil) {
             current = current.next!
         }
         current.next = node
+    }
+    
+    mutating func prepend(_ data: T) {
+        let newHead = Node<T>(data: data)
+        newHead.next = head
+        head = newHead
+    }
+    
+    mutating func delete(with data: T) {
+        
+        guard let head = head else { return }
+        guard head.data != data else {
+            self.head = head.next
+            return
+        }
+        
+        var current = head
+        while (current.next != nil) {
+            if current.next?.data == data {
+                current.next = current.next?.next
+                return
+            }
+            current = current.next!
+        }
+        
     }
     
 }
@@ -72,5 +91,8 @@ ll.append("A")
 ll.append("D")
 ll.append("B")
 
+ll.prepend("Í")
+ll.delete(with: "A")
+ll.delete(with: "Í")
 print(ll)
 //: [Next](@next)
