@@ -246,7 +246,7 @@ func addOneNumber(_ array: [Int]) -> [Int] {
 }
 
 //A = [1, 2, 9, 9]
-//addOneNumber([9,9,9,9,1,2])
+addOneNumber([9,9,9,9,1,2])
 
 //: [Next](@next)
 
