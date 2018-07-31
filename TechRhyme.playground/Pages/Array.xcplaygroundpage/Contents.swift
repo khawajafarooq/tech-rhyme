@@ -24,7 +24,7 @@ func duplicate(_ array: [Int]) -> [Int] {
     return result
 }
 
-//duplicate([0,1,2,5,3,1,3])
+duplicate([0,1,2,5,3,1,3])
 
 //: Find duplicates k times
 
@@ -50,13 +50,14 @@ func duplicate(_ array: [Int], _ k: Int) -> Int {
     return -1
 }
 
-//duplicate([0,1,2,5,3,1,1,1,3], 4)
+duplicate([0,1,2,5,3,1,1,1,3], 4)
 
 // Reverse an array
 // Input: A = [2, 6, 3, 1, 7]
 // Output: A = [7, 1, 3, 6, 2]
 
-func reverser<T>(_ array: [T]) throws -> [T] {
+let A = [2, 6, 3, 1, 7]
+func reverser<T>(_ array: [T]) -> [T] {
     
     guard array.count > 1 else { return array }
     
@@ -71,22 +72,25 @@ func reverser<T>(_ array: [T]) throws -> [T] {
     return result
 }
 
-//reverser(A)
+reverser(A)
 
 // Array left rotation
 // Input: A = [2, 6, 3, 1, 7], d = 2
 // Output: A = [3, 1, 7, 2, 6]
 
 func leftRotation<T>(_ array:[T], d: Int) -> [T] {
-    var result: [T] = []
+    var result = array
     
-    array.forEach { _ in
-        let element = result.remove(at: 0)
-        result.append(element)
+    guard array.count > 1 else { return array }
+    
+    for _ in 1...d {
+        result.append(result.removeFirst())
     }
     
     return result
 }
+
+leftRotation(A, d: 2)
 
 // Rotation with index
 // expected index: 2, 3, 4, 0, 1
