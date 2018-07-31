@@ -179,7 +179,26 @@ func findTwoMax(_ array: [Int]) -> (Int, Int)? {
     return (max, secondMax)
 }
 
-//findTwoMax([1,12,3,7,6,5,8,14])
+findTwoMax([1,12,3,7,6,5,8,14])
+
+func twoMax(_ array: [Int]) -> (Int, Int)? {
+    guard array.count > 1 else { return nil }
+    
+    let max = array.max()!
+    var secondMax = Int.min
+
+    array.forEach { element in
+        if secondMax < element &&
+            element < max {
+            secondMax = element
+        }
+    }
+    
+    return (max, secondMax)
+}
+
+let p = [1,12,3,7,6,5,8,14]
+twoMax(p)
 
 
 // Add a number to array
