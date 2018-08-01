@@ -5,9 +5,7 @@ extension LinkedList {
     
     mutating public func reverse() {
         
-        guard head != nil else {
-            return
-        }
+        guard !isEmpty else { return }
         
         var current = head!
         var prev: Node<T>? = nil
@@ -22,7 +20,11 @@ extension LinkedList {
         prev = current
         current = head!
     }
-    
+
+    public func reverseRecursive() {
+        
+    }
+
     public func isLoop() -> Bool {
         return false
     }

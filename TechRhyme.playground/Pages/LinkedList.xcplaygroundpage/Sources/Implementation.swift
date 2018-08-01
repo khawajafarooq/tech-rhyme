@@ -20,7 +20,7 @@ public struct LinkedList<T: Comparable> {
     public init() {}
     
     mutating public func append(_ data: T) {
-        guard head != nil else {
+        guard !isEmpty else {
             self.head = Node<T>(data: data)
             return
         }
@@ -28,9 +28,9 @@ public struct LinkedList<T: Comparable> {
     }
     
     mutating public func append(_ node: Node<T>) {
-        var current = head!
-        while (current.next != nil) {
-            current = current.next!
+        guard var current = head else { return }
+        while let next = current.next {
+            current = next
         }
         current.next = node
     }
@@ -43,44 +43,38 @@ public struct LinkedList<T: Comparable> {
     
     mutating public func delete(with data: T) {
         
-        guard let head = head else { return }
-        guard head.data != data else {
-            self.head = head.next
+        guard var current = head else { return }
+        guard current.data != data else {
+            head = current.next
             return
         }
         
-        var current = head
-        while (current.next != nil) {
+        while current.next != nil {
             if current.next?.data == data {
                 current.next = current.next?.next
                 return
             }
             current = current.next!
         }
-        
     }
     
 }
 
 extension LinkedList: CustomStringConvertible {
     public var description: String {
-        guard head != nil else {
+        guard var current = head else {
             return """
             LINKED LIST EMPTY 🚫
             """
         }
         
-        var result = "\(head!.data)->"
+        var result = "\(current.data)->"
         
-        var current = head
-        
-        while (current?.next != nil) {
-            
-            current = current?.next!
-            result.append("\(current!.data)->")
+        while current.next != nil {
+            current = current.next!
+            result.append("\(current.data)->")
         }
         result.append("nil")
         return result
-        
     }
 }
