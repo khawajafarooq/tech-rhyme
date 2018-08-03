@@ -24,6 +24,7 @@ extension Node: Hashable {
 public class LinkedList<T: Comparable> {
     
     public var head: Node<T>?
+    public private(set) var count: Int = 0
     
     var isEmpty: Bool {
         return head == nil
@@ -34,6 +35,7 @@ public class LinkedList<T: Comparable> {
     public func append(_ data: T) {
         guard !isEmpty else {
             self.head = Node(data: data)
+            count += 1
             return
         }
         append(Node(data: data))
@@ -41,9 +43,7 @@ public class LinkedList<T: Comparable> {
     
     public func append(data: T, at position: Int) {
         
-        guard position >= 0 else {
-            return
-        }
+        guard position >= 0 else { return }
         
         if position == 0 {
             prepend(data)
@@ -61,6 +61,7 @@ public class LinkedList<T: Comparable> {
             let newNode = Node(data: data)
             newNode.next = node.next
             node.next = newNode
+            count += 1
         }
     }
     
@@ -70,12 +71,14 @@ public class LinkedList<T: Comparable> {
             current = next
         }
         current.next = node
+        count += 1
     }
     
     public func prepend(_ data: T) {
         let newHead = Node(data: data)
         newHead.next = head
         head = newHead
+        count += 1
     }
     
     public func delete(with data: T) {
@@ -83,12 +86,14 @@ public class LinkedList<T: Comparable> {
         guard var current = head else { return }
         guard current.data != data else {
             head = current.next
+            count -= 1
             return
         }
         
         while current.next != nil {
             if current.next?.data == data {
                 current.next = current.next?.next
+                count -= 1
                 return
             }
             current = current.next!
@@ -109,9 +114,9 @@ extension LinkedList: CustomStringConvertible {
         
         while current.next != nil {
             current = current.next!
-            result.append("\(current.data)->")
+            result += "\(current.data)->"
         }
-        result.append("nil")
+        result += "nil\n\(count)"
         return result
     }
 }
