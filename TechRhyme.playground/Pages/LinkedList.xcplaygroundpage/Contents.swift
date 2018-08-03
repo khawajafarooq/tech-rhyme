@@ -16,7 +16,3 @@ print(ll)
 ll.reverse()
 print(ll)
 
-var ll2 = LinkedList<String>()
-ll2.reverse()
-print(ll2)
-//: [Next](@next)

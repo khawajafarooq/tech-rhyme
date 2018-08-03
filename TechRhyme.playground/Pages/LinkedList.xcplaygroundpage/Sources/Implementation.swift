@@ -1,17 +1,29 @@
 import Foundation
 
 public class Node<T: Comparable> {
-    let data: T
-    var next: Node? = nil
+    public let data: T
+    public var next: Node? = nil
     
-    init(data: T) {
+    public init(data: T) {
         self.data = data
     }
 }
 
-public struct LinkedList<T: Comparable> {
+extension Node: Equatable {
+    static public func ==(lhs: Node, rhs: Node) -> Bool {
+        return lhs.data == rhs.data && lhs.next == rhs.next
+    }
+}
+
+extension Node: Hashable {
+    public var hashValue: Int {
+        return Unmanaged.passUnretained(self).toOpaque().hashValue
+    }
+}
+
+public class LinkedList<T: Comparable> {
     
-    var head: Node<T>?
+    public var head: Node<T>?
     
     var isEmpty: Bool {
         return head == nil
@@ -19,7 +31,7 @@ public struct LinkedList<T: Comparable> {
     
     public init() {}
     
-    mutating public func append(_ data: T) {
+    public func append(_ data: T) {
         guard !isEmpty else {
             self.head = Node(data: data)
             return
@@ -27,7 +39,7 @@ public struct LinkedList<T: Comparable> {
         append(Node(data: data))
     }
     
-    mutating public func append(data: T, at position: Int) {
+    public func append(data: T, at position: Int) {
         
         guard position >= 0 else {
             return
@@ -52,7 +64,7 @@ public struct LinkedList<T: Comparable> {
         }
     }
     
-    mutating public func append(_ node: Node<T>) {
+    public func append(_ node: Node<T>) {
         guard var current = head else { return }
         while let next = current.next {
             current = next
@@ -60,13 +72,13 @@ public struct LinkedList<T: Comparable> {
         current.next = node
     }
     
-    mutating public func prepend(_ data: T) {
+    public func prepend(_ data: T) {
         let newHead = Node(data: data)
         newHead.next = head
         head = newHead
     }
     
-    mutating public func delete(with data: T) {
+    public func delete(with data: T) {
         
         guard var current = head else { return }
         guard current.data != data else {
