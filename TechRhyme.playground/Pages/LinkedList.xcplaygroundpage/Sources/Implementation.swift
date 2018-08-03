@@ -21,10 +21,35 @@ public struct LinkedList<T: Comparable> {
     
     mutating public func append(_ data: T) {
         guard !isEmpty else {
-            self.head = Node<T>(data: data)
+            self.head = Node(data: data)
             return
         }
-        append(Node<T>(data: data))
+        append(Node(data: data))
+    }
+    
+    mutating public func append(data: T, at position: Int) {
+        
+        guard position >= 0 else {
+            return
+        }
+        
+        if position == 0 {
+            prepend(data)
+        } else {
+
+            guard var node = head else { return }
+
+            var counter = 0
+            while counter < position-1 && node.next != nil {
+                node = node.next!
+                counter += 1
+            }
+            
+            // adding node to the right position
+            let newNode = Node(data: data)
+            newNode.next = node.next
+            node.next = newNode
+        }
     }
     
     mutating public func append(_ node: Node<T>) {
@@ -36,7 +61,7 @@ public struct LinkedList<T: Comparable> {
     }
     
     mutating public func prepend(_ data: T) {
-        let newHead = Node<T>(data: data)
+        let newHead = Node(data: data)
         newHead.next = head
         head = newHead
     }
