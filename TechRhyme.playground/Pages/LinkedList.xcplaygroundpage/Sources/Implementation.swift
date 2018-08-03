@@ -33,11 +33,6 @@ public class LinkedList<T: Comparable> {
     public init() {}
     
     public func append(_ data: T) {
-        guard !isEmpty else {
-            self.head = Node(data: data)
-            count += 1
-            return
-        }
         append(Node(data: data))
     }
     
@@ -66,6 +61,11 @@ public class LinkedList<T: Comparable> {
     }
     
     public func append(_ node: Node<T>) {
+        guard !isEmpty else {
+            self.head = Node(data: node.data)
+            count += 1
+            return
+        }
         guard var current = head else { return }
         while let next = current.next {
             current = next
@@ -83,21 +83,30 @@ public class LinkedList<T: Comparable> {
     
     public func delete(with data: T) {
         
-        guard var current = head else { return }
-        guard current.data != data else {
-            head = current.next
+        guard var node = head else { return }
+        guard node.data != data else {
+            head = node.next
             count -= 1
             return
         }
         
-        while current.next != nil {
-            if current.next?.data == data {
-                current.next = current.next?.next
+        while let next = node.next {
+            if next.data == data {
+                node.next = node.next?.next
                 count -= 1
                 return
             }
-            current = current.next!
+            node = next
         }
+        
+//        while current.next != nil {
+//            if current.next?.data == data {
+//                current.next = current.next?.next
+//                count -= 1
+//                return
+//            }
+//            current = current.next!
+//        }
     }
     
 }
