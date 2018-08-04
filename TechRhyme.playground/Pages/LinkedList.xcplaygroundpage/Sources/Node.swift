@@ -23,6 +23,9 @@ extension Node: Hashable {
 
 extension Node: CustomStringConvertible {
     public var description: String {
-        return "🔘: \(value)"
+        
+        return """
+        [\(value)]
+        """
     }
 }

@@ -10,16 +10,17 @@ protocol BaseLinkedList {
     func delete(_ value: DataType)
 }
 
-public class LinkedList<T: Comparable> {
+
+public class LinkedList<T: Comparable>: BaseLinkedList {
     
-    public var head: Node<T>?
-    public private(set) var count: Int = 0
+    public init() {}
+    
+    public var head: Node<T>? = nil
+    public var count: Int = 0
     
     public var isEmpty: Bool {
         return head == nil
     }
-    
-    public init() {}
     
     public func append(_ value: T) {
         append(Node(value: value))
@@ -69,6 +70,7 @@ public class LinkedList<T: Comparable> {
     }
     
     public func append(_ node: Node<T>) {
+        
         guard !isEmpty else {
             self.head = Node(value: node.value)
             count += 1
@@ -93,19 +95,19 @@ public class LinkedList<T: Comparable> {
 
 extension LinkedList: CustomStringConvertible {
     public var description: String {
-        guard var current = head else {
+        guard var node = head else {
             return """
-            LINKED LIST IS EMPTY 🚫
+            LinkedList is empty 🚫
             """
         }
-        
-        var result = "\(current.value)->"
-        
-        while current.next != nil {
-            current = current.next!
-            result += "\(current.value)->"
+
+        var print = ""
+
+        while let next = node.next {
+            print += "\(node)→"
+            node = next
         }
-        result += "nil\n\(count)"
-        return result
+        print += "nil"
+        return print
     }
 }
