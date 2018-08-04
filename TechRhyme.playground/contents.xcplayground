@@ -4,5 +4,6 @@
         <page name='Main'/>
         <page name='Array'/>
         <page name='LinkedList'/>
+        <page name='Stack'/>
     </pages>
 </playground>
