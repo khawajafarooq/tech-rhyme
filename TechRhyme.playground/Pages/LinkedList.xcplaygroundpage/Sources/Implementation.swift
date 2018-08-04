@@ -21,6 +21,12 @@ extension Node: Hashable {
     }
 }
 
+extension Node: CustomStringConvertible {
+    public var description: String {
+        return "🔘: \(data)"
+    }
+}
+
 public class LinkedList<T: Comparable> {
     
     public var head: Node<T>?
@@ -98,15 +104,6 @@ public class LinkedList<T: Comparable> {
             }
             node = next
         }
-        
-//        while current.next != nil {
-//            if current.next?.data == data {
-//                current.next = current.next?.next
-//                count -= 1
-//                return
-//            }
-//            current = current.next!
-//        }
     }
     
 }

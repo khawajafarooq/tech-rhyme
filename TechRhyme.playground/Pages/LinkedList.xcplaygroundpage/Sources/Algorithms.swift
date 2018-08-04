@@ -21,8 +21,17 @@ extension LinkedList {
         current = head!
     }
 
-    public func reverseRecursive() {
+    public func middleNode() -> Node<T>? {
         
+        guard var node = head else { return nil }
+        var secNext = node.next
+        while secNext != nil {
+            
+            node = node.next!
+            secNext = secNext?.next?.next
+        }
+        
+        return node
     }
 
     public func isLoop() -> Bool {
