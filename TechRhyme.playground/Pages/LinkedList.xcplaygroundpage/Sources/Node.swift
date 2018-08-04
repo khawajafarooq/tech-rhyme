@@ -1,17 +1,17 @@
 import Foundation
 
 public class Node<T: Comparable> {
-    public let data: T
+    public let value: T
     public var next: Node? = nil
     
-    public init(data: T) {
-        self.data = data
+    public init(value: T) {
+        self.value = value
     }
 }
 
 extension Node: Equatable {
     static public func ==(lhs: Node, rhs: Node) -> Bool {
-        return lhs.data == rhs.data && lhs.next == rhs.next
+        return lhs.value == rhs.value && lhs.next == rhs.next
     }
 }
 
@@ -23,6 +23,6 @@ extension Node: Hashable {
 
 extension Node: CustomStringConvertible {
     public var description: String {
-        return "🔘: \(data)"
+        return "🔘: \(value)"
     }
 }

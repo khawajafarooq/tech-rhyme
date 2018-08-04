@@ -1,26 +1,55 @@
 import Foundation
 
+
+protocol BaseLinkedList {
+    associatedtype DataType: Comparable
+    var head: Node<DataType>? { get set }
+    var count: Int { get set }
+    var isEmpty: Bool { get }
+    func append(_ value: DataType)
+    func delete(_ value: DataType)
+}
+
 public class LinkedList<T: Comparable> {
     
     public var head: Node<T>?
     public private(set) var count: Int = 0
     
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         return head == nil
     }
     
     public init() {}
     
-    public func append(_ data: T) {
-        append(Node(data: data))
+    public func append(_ value: T) {
+        append(Node(value: value))
     }
     
-    public func append(data: T, at position: Int) {
+    public func delete(_ value: T) {
+        
+        guard var node = head else { return }
+        guard node.value != value else {
+            head = node.next
+            count -= 1
+            return
+        }
+        
+        while let next = node.next {
+            if next.value == value {
+                node.next = node.next?.next
+                count -= 1
+                return
+            }
+            node = next
+        }
+    }
+    
+    public func append(value: T, at position: Int) {
         
         guard position >= 0 else { return }
         
         if position == 0 {
-            prepend(data)
+            prepend(value)
         } else {
 
             guard var node = head else { return }
@@ -32,7 +61,7 @@ public class LinkedList<T: Comparable> {
             }
             
             // adding node to the right position
-            let newNode = Node(data: data)
+            let newNode = Node(value: value)
             newNode.next = node.next
             node.next = newNode
             count += 1
@@ -41,7 +70,7 @@ public class LinkedList<T: Comparable> {
     
     public func append(_ node: Node<T>) {
         guard !isEmpty else {
-            self.head = Node(data: node.data)
+            self.head = Node(value: node.value)
             count += 1
             return
         }
@@ -53,30 +82,11 @@ public class LinkedList<T: Comparable> {
         count += 1
     }
     
-    public func prepend(_ data: T) {
-        let newHead = Node(data: data)
+    public func prepend(_ value: T) {
+        let newHead = Node(value: value)
         newHead.next = head
         head = newHead
         count += 1
-    }
-    
-    public func delete(with data: T) {
-        
-        guard var node = head else { return }
-        guard node.data != data else {
-            head = node.next
-            count -= 1
-            return
-        }
-        
-        while let next = node.next {
-            if next.data == data {
-                node.next = node.next?.next
-                count -= 1
-                return
-            }
-            node = next
-        }
     }
     
 }
@@ -85,15 +95,15 @@ extension LinkedList: CustomStringConvertible {
     public var description: String {
         guard var current = head else {
             return """
-            LINKED LIST EMPTY 🚫
+            LINKED LIST IS EMPTY 🚫
             """
         }
         
-        var result = "\(current.data)->"
+        var result = "\(current.value)->"
         
         while current.next != nil {
             current = current.next!
-            result += "\(current.data)->"
+            result += "\(current.value)->"
         }
         result += "nil\n\(count)"
         return result
