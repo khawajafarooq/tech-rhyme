@@ -1,7 +1,7 @@
 import Foundation
 
-public class Stack<T> {
-    private var list: [T] = []
+public class Stack<T: Equatable> {
+    private var list = [T]()
     
     public init() {}
     public var count: Int {
@@ -10,6 +10,10 @@ public class Stack<T> {
     
     public var isEmpty: Bool {
         return list.isEmpty
+    }
+    
+    public var top: T? {
+        return list.last
     }
     
     public func push(_ element: T) {
@@ -22,10 +26,6 @@ public class Stack<T> {
         }
         return nil
     }
-    
-    public func top() -> T? {
-        return list.last
-    }
 }
 
 extension Stack: CustomStringConvertible {
@@ -36,7 +36,13 @@ extension Stack: CustomStringConvertible {
         
         var print = ""
         for item in list.reversed() {
+            
             print += "|\(item)|"
+            
+            if item == top! {
+                print += " -> Top"
+            }
+            
             print += "\n---\n"
         }
         
