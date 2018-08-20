@@ -49,3 +49,52 @@ extension Stack: CustomStringConvertible {
         return print
     }
 }
+
+public struct MyStack<Element> {
+    private var elements:[Element] = []
+    
+//    init<S: Sequence>(elements: S) where S.Iterator.Element == Element {
+//        self.elements = elements
+//    }
+    
+    public init() {}
+    
+    public var isEmpty: Bool {
+        return elements.isEmpty
+    }
+    
+    public var top: Element? {
+        return elements.last
+    }
+    
+    public mutating func push(_ element: Element) {
+        elements.append(element)
+    }
+    
+    public mutating func pop() -> Element? {
+        if !isEmpty {
+            return elements.removeLast()
+        }
+        return nil
+    }
+}
+
+extension MyStack: Collection {
+    public var startIndex: Int {
+        return elements.startIndex
+    }
+    
+    public var endIndex: Int {
+        return elements.endIndex
+    }
+    
+    public subscript(index: Int) -> Element {
+        return elements[index]
+    }
+    
+    public func index(after i: Int) -> Int {
+        return elements.index(after: i)
+    }
+}
+
+
