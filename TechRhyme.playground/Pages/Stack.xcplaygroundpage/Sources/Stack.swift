@@ -53,10 +53,6 @@ extension Stack: CustomStringConvertible {
 public struct MyStack<Element> {
     private var elements:[Element] = []
     
-//    init<S: Sequence>(elements: S) where S.Iterator.Element == Element {
-//        self.elements = elements
-//    }
-    
     public init() {}
     
     public var isEmpty: Bool {
