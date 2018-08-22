@@ -8,7 +8,7 @@ func ~=<T: Equatable>(pattern: [T], value: T) -> Bool {
     return pattern.contains(value)
 }
 
-func isExpressionBalanced(_ expression: String) -> Bool {
+public func isExpressionBalanced(_ expression: String) -> Bool {
     
     guard !expression.isEmpty else { return false }
     
@@ -42,7 +42,7 @@ var Operations: [String: (Double, Double) -> Double] = [
 
 let Operators = ["+", "-", "*", "/"]
 
-func postfix(_ expression: String) -> Double {
+public func postfix(_ expression: String) -> Double {
     
     guard !expression.isEmpty else { return 0.0 }
     let exp = expression.components(separatedBy: " ")
