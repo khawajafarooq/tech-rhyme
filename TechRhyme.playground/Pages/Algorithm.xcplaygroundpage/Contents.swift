@@ -53,7 +53,7 @@ func guess(_ number: Int, _ range: ClosedRange<Int>, _ attempt: Int) -> Int {
     
     var tries = attempt
     
-    if range.lowerBound > range.upperBound {
+    guard range.lowerBound < range.upperBound else {
         return -1
     }
     
