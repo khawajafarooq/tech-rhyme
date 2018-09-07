@@ -34,7 +34,7 @@ func guess(the number: Int, in range: ClosedRange<Int>) -> Int {
         tries += 1
 
         let mid = (start + end)/2
-        print(mid)
+        
         if mid == number {
             break
         } else if mid < number {
@@ -61,16 +61,12 @@ func guess(_ number: Int, _ range: ClosedRange<Int>, _ attempt: Int) -> Int {
     
     tries += 1
     
-    if mid == number {
-        return tries
-    } else if mid < number {
-        let newRange = mid+1...range.upperBound
-        return guess(number, newRange, tries)
-    } else {
-        let newRange = range.lowerBound...mid-1
-        return guess(number, newRange, tries)
+    switch true {
+    case mid == number: return tries
+    case mid < number: return guess(number, mid+1...range.upperBound, tries)
+    case mid > number: return guess(number, range.lowerBound...mid-1, tries)
+    default: return -1
     }
-
 }
 
 guess(8, 1...10, 0)
