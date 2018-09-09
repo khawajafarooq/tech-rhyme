@@ -131,35 +131,28 @@ public struct TwoStack<Element> {
     private var top1: Int = -1
     private var top2: Int = -1
     
-    private var count1: Int = 0
-    private var count2: Int = 0
-    
     public init() {}
     
     public mutating func push1(_ value: Element) {
         
         top1 += 1
         top2 += 1
-        count1 += 1
         push(value, at: top1)
     }
     
     public mutating func push2(_ value: Element) {
         top2 += 1
-        count2 += 1
         push(value, at: top2)
     }
     
     public mutating func pop1() -> Element? {
         top1 -= 1
         top2 -= 1
-        count1 -= 1
         return pop(at :top1+1)
     }
     
     public mutating func pop2() -> Element? {
         top2 -= 1
-        count2 -= 1
         return pop(at :top2+1)
     }
     
