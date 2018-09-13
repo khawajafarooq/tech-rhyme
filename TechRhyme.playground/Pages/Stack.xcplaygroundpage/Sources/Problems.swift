@@ -63,3 +63,33 @@ public func postfix(_ expression: String) -> Double {
     
     return stack.last!
 }
+
+public func prefix(_ expression: String) -> Double {
+    
+    guard !expression.isEmpty else { return 0.0 }
+    let exp = expression.components(separatedBy: " ")
+    var stack = [Double]()
+    var lastOp = ""
+    for char in exp {
+        
+        if let number = Double(char) {
+            
+            if !stack.isEmpty {
+                let last = stack.removeLast()
+                if let op = Operations[lastOp] {
+                    stack.append(op(last, number))
+                }
+            } else {
+                stack.append(number)
+            }
+        } else {
+            lastOp = char
+        }
+    }
+    
+    return stack.last!
+}
+
+// 2 * 3 + 4
+// * 2 3 + 4
+// 2 3 * 4 +

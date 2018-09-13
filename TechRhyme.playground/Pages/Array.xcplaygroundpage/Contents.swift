@@ -61,12 +61,11 @@ func reverser<T>(_ array: [T]) -> [T] {
     
     guard array.count > 1 else { return array }
     
-    var result: [T] = []
-    var index = array.count-1
+    var a = array
     
-    while index >= 0 {
-        result.append(array[index])
-        index -= 1
+    var result: [T] = []
+    array.forEach { _ in
+        result.append(a.removeLast())
     }
     
     return result
@@ -132,29 +131,29 @@ func rightRotationMod<T>(_ array:[T], d: Int) -> [T] {
 //rightRotationMod(A, d: 2)
 
 // shuffle an array
-func shuffle<T:Comparable>(_ a:[T]) -> [T] {
-    var array = a
-    guard !array.isEmpty else { return array }
-    
-    // loop throughout the array
-    // get random index
-    // swap current index with random index
-    var last = array.count - 1
-    while (last > 0) {
-        let rand = Int.random(in: 0..<last)
-        array.swapAt(last, rand)
-        last -= 1
-    }
-    
-    return array
-}
+//func shuffle<T:Comparable>(_ a:[T]) -> [T] {
+//    var array = a
+//    guard !array.isEmpty else { return array }
+//
+//    // loop throughout the array
+//    // get random index
+//    // swap current index with random index
+//    var last = array.count - 1
+//    while (last > 0) {
+//        let rand = Int.random(in: 0..<last)
+//        array.swapAt(last, rand)
+//        last -= 1
+//    }
+//
+//    return array
+//}
 
 //shuffle(["A", "B", "C", "D", "F", "M", "P"])
-shuffle([1,4,3,6,8,10])
+//shuffle([1,4,3,6,8,10])
 
 
 var m = [1,4,3,6,8,10]
-m.shuffle() // swift 4.2
+//m.shuffle() // swift 4.2
 
 // Find two maximum from array
 func findTwoMax(_ array: [Int]) -> (Int, Int)? {
@@ -248,5 +247,127 @@ func addOneNumber(_ array: [Int]) -> [Int] {
 //A = [1, 2, 9, 9]
 addOneNumber([9,9,9,9,1,2])
 
+
+// Two sub problem
+
+// Input: A = [0,9,5,2], target = 7
+// Output: [5,2]
+// brute-force
+
+func twoSum1(_ array: [Int], target: Int) -> [Int] {
+
+    var times = 0
+    for value1 in array {
+        for value2 in array where value2 != value1  {
+            times += 1
+            if value1 + value2 == target {
+                return [value1, value2]
+            }
+        }
+    }
+
+    return []
+}
+twoSum1([0,5,2,9], target: 10)
+
+func twoSum2(_ array: [Int], target: Int) -> [Int] {
+    let result = array.filter{ array.contains(target-$0) }
+    return result.count > 1 ? result: []
+}
+
+twoSum2([0,5,2,9], target: 10)
+
+//func twoSum(_ array: [Int], target: Int) -> [Int] {
+//
+//    var dict: [Int: Int] = [:]
+//    for value in array {
+//        let diff = target - value
+//        if let val = dict[value] {
+//            return [val, value]
+//        } else {
+//            dict[diff] = value
+//        }
+//    }
+//
+//    return []
+//}
+//
+//twoSum([0,9,5,2,1], target: 10)
+
+//func duplicate(_ a1: [Int], _ a2: [Int]) -> [Int] {
+//    return a1.filter{ return a2.contains($0) }
+//}
+
+//duplicate([0,9,5,2,1,33], [5,7,0,10,12,33])
+
+func duplicate(_ a1: [Int], _ a2: [Int]) -> [Int] {
+    return Set(a1).intersection(Set(a2)).map { $0 }
+}
+
+//let DS1 = Array(0...100000).filter { $0 % 2 == 0 }
+//let DS2 = Array(0...100000).filter { $0 % 2 == 0 }
+//duplicate(DS1, DS2)
+
+
+struct Interval {
+    let start: Int
+    let end: Int
+    init(_ start: Int, _ end: Int) {
+        self.start = start
+        self.end = end
+    }
+}
+
+extension Interval: Equatable {
+    static func == (lhs: Interval, rhs: Interval) -> Bool {
+        return lhs.start == rhs.start && lhs.end == rhs.end
+    }
+}
+
+extension Interval: CustomStringConvertible {
+    var description: String {
+        return """
+        (\(start),\(end))
+        """
+    }
+}
+
+// Merge intervals
+func mergeIntervals(_ a:[Interval]) -> [Interval] {
+
+    var array = a.sorted(by: { $0.start < $1.start })
+    var stack: [Interval] = []
+    stack.append(array[0])
+    for interval in array where interval != array[0] {
+
+        let top = stack.last!
+        if top.end < interval.start {
+            // push
+            stack.append(interval)
+        } else if top.end < interval.end {
+            // update
+            stack.removeLast()
+            stack.append(Interval(top.start, interval.end))
+        }
+    }
+
+    return stack
+}
+
+//let intervals = [
+//    Interval(1,3),
+//    Interval(6,8),
+//    Interval(5,7),
+//    Interval(2,4)
+//]
+
+let intervals = [
+    Interval(6,8),
+    Interval(1,9),
+    Interval(2,4),
+    Interval(4,7)
+]
+
+print(mergeIntervals(intervals))
 //: [Next](@next)
 

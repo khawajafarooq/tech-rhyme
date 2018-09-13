@@ -36,6 +36,8 @@ ts.pop2()
 ts.pop2()
 ts.pop1()
 ts.pop2()
+
+prefix("* 2 3 + 4")
 //: [Next](@next)
 
 //: [Next](@next)

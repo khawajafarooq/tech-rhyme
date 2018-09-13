@@ -6,5 +6,6 @@
         <page name='LinkedList'/>
         <page name='Stack'/>
         <page name='Algorithm'/>
+        <page name='Search'/>
     </pages>
 </playground>
