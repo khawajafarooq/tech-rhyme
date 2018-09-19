@@ -7,5 +7,6 @@
         <page name='Stack'/>
         <page name='Algorithm'/>
         <page name='Search'/>
+        <page name='BinaryTree'/>
     </pages>
 </playground>

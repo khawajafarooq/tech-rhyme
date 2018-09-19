@@ -2,7 +2,6 @@
 
 import Foundation
 
-//: Find Duplicates
 
 func duplicate(_ array: [Int]) -> [Int] {
     
@@ -24,9 +23,7 @@ func duplicate(_ array: [Int]) -> [Int] {
     return result
 }
 
-duplicate([0,1,2,5,3,1,3])
-
-//: Find duplicates k times
+duplicate([0,1,2,5,3,1,3,0])
 
 func duplicate(_ array: [Int], _ k: Int) -> Int {
     
@@ -248,7 +245,7 @@ func addOneNumber(_ array: [Int]) -> [Int] {
 addOneNumber([9,9,9,9,1,2])
 
 
-// Two sub problem
+// Two sum problem
 
 // Input: A = [0,9,5,2], target = 7
 // Output: [5,2]
@@ -271,7 +268,7 @@ func twoSum1(_ array: [Int], target: Int) -> [Int] {
 twoSum1([0,5,2,9], target: 10)
 
 func twoSum2(_ array: [Int], target: Int) -> [Int] {
-    let result = array.filter{ array.contains(target-$0) }
+    let result = array.filter { array.contains(target-$0) }
     return result.count > 1 ? result: []
 }
 
@@ -354,19 +351,21 @@ func mergeIntervals(_ a:[Interval]) -> [Interval] {
     return stack
 }
 
-//let intervals = [
-//    Interval(1,3),
-//    Interval(6,8),
-//    Interval(5,7),
-//    Interval(2,4)
-//]
-
 let intervals = [
+    Interval(1,3),
     Interval(6,8),
-    Interval(1,9),
-    Interval(2,4),
-    Interval(4,7)
+    Interval(5,7),
+    Interval(5,7),
+    Interval(2,4)
 ]
+
+//let intervals = [
+//    Interval(6,8),
+//    Interval(1,9),
+//    Interval(2,4),
+//    Interval(2,4),
+//    Interval(4,7)
+//]
 
 print(mergeIntervals(intervals))
 //: [Next](@next)

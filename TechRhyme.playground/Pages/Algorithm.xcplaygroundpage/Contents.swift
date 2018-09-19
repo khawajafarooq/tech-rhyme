@@ -70,4 +70,46 @@ func guess(_ number: Int, _ range: ClosedRange<Int>, _ attempt: Int) -> Int {
 }
 
 guess(8, 1...10, 0)
+
+
+func fizzbuzz(_ input: Int) -> String {
+    
+    let fizz = (input % 3 == 0)
+    let buzz = (input % 5 == 0)
+    
+    switch (fizz, buzz) {
+    case (true, false): return "fizz"
+    case (false, true): return "buzz"
+    case (true, true): return "fizzbuzz"
+    default: return String(input)
+    }
+}
+
+for i in 1...100 {
+    print(fizzbuzz(i))
+}
+
+//func count(of word: String, in input: String) -> Int {
+//
+//    var j = 0
+//    var counter = 0
+//    for i in 0..<input.count {
+//
+//        if input[id] == word[jd] {
+//            j += 1
+//        } else {
+//            j = 0
+//        }
+//
+//        if j == word.count-1 {
+//            counter += 1
+//            j = 0
+//        }
+//    }
+//
+//    return counter
+//}
+
+count(of: "hello", in: "abcahellomhellooi0")
 //: [Next](@next)
+
