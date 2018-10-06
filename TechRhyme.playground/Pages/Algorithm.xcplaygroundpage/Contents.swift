@@ -99,7 +99,7 @@ func fizzbuzzRecursion(_ a: [Int]) {
 //    print(fizzbuzz(i))
 //}
 
-fizzbuzzRecursion(Array(1...100))
+//fizzbuzzRecursion(Array(1...100))
 
 //func count(of word: String, in input: String) -> Int {
 //
@@ -155,11 +155,11 @@ let q2 = [
     [4, 4, 882],
 ]
 
-var q3: [[Int]] = [[]]
-for i in 0...100000 {
-    let item = i % 2 == 0 ? q1[0] : q2[2]
-    q3.append(item)
-}
+//var q3: [[Int]] = [[]]
+//for i in 0...100000 {
+//    let item = i % 2 == 0 ? q1[0] : q2[2]
+//    q3.append(item)
+//}
 
 func arrayManipulation(n: Int, queries: [[Int]]) -> Int {
     
@@ -188,7 +188,31 @@ func arrayManipulation(n: Int, queries: [[Int]]) -> Int {
     return max
 }
 
-arrayManipulation(n: 10000, queries: q3)
+//arrayManipulation(n: 10000, queries: q3)
+
+
+func groupAnagrams(_ strs: [String]) -> [[String]] {
+    
+    var dict: [String: [String]] = [:]
+    
+    for str in strs.sorted() {
+        
+        let key = String(str.sorted())
+        
+        if (dict[key] != nil) {
+            dict[key]?.append(str)
+        } else {
+            dict[key] = [str]
+        }
+    }
+    
+    return Array(dict.values)
+}
+
+
+let t = ["eat","tea","tan","ate","nat","bat"]
+print(groupAnagrams(t))
+
 
 
 
