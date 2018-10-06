@@ -251,45 +251,46 @@ addOneNumber([9,9,9,9,1,2])
 // Output: [5,2]
 // brute-force
 
-func twoSum1(_ array: [Int], target: Int) -> [Int] {
+func twoSum1(_ nums: [Int], target: Int) -> [Int] {
 
     var times = 0
-    for value1 in array {
-        for value2 in array where value2 != value1  {
+    
+    for idx1 in 0..<nums.count {
+        for idx2 in 0..<nums.count where idx2 != idx1  {
             times += 1
-            if value1 + value2 == target {
-                return [value1, value2]
+            if nums[idx1] + nums[idx2] == target {
+                return [idx1, idx2]
             }
         }
     }
-
+    
     return []
 }
 twoSum1([0,5,2,9], target: 10)
 
 func twoSum2(_ array: [Int], target: Int) -> [Int] {
-    let result = array.filter { array.contains(target-$0) }
-    return result.count > 1 ? result: []
+    return array.filter { array.contains(target-$0) }
 }
 
-twoSum2([0,5,2,9], target: 10)
+twoSum2([0,5,2,9], target: 7)
 
-//func twoSum(_ array: [Int], target: Int) -> [Int] {
-//
-//    var dict: [Int: Int] = [:]
-//    for value in array {
-//        let diff = target - value
-//        if let val = dict[value] {
-//            return [val, value]
-//        } else {
-//            dict[diff] = value
-//        }
-//    }
-//
-//    return []
-//}
-//
-//twoSum([0,9,5,2,1], target: 10)
+func twoSum(_ nums: [Int], target: Int) -> [Int] {
+
+    var dict: [Int: Int] = [:]
+    
+    for idx in 0..<nums.count {
+        let diff = target - nums[idx]
+        if let value = dict[idx] {
+            return [value, idx]
+        } else {
+            dict[diff] = idx
+        }
+    }
+
+    return []
+}
+
+twoSum([0,9,5,2,1], target: 10)
 
 //func duplicate(_ a1: [Int], _ a2: [Int]) -> [Int] {
 //    return a1.filter{ return a2.contains($0) }
@@ -368,5 +369,83 @@ let intervals = [
 //]
 
 print(mergeIntervals(intervals))
+
+
+struct Category {
+    let id: Int
+    let name: String
+}
+
+struct Subcategory {
+    let parentId: Int
+    let name: String
+}
+
+let countries: [Category] = [
+    Category(id: 1, name: "PAKISTAN"),
+    Category(id: 2, name: "INDIA"),
+    Category(id: 3, name: "GERMANY")
+]
+
+let cities: [Subcategory] = [
+    Subcategory(parentId: 1, name: "LAHORE"),
+    Subcategory(parentId: 1, name: "ISLAMABAD"),
+    Subcategory(parentId: 1, name: "KARACHI"),
+    Subcategory(parentId: 2, name: "MUMBAI"),
+    Subcategory(parentId: 2, name: "PUNE"),
+    Subcategory(parentId: 2, name: "CHENNAI"),
+    Subcategory(parentId: 3, name: "MUNIC"),
+    Subcategory(parentId: 3, name: "BERLIN")
+]
+
+func searching() {
+    
+    var result: [String] = []
+    
+    for city in cities {
+        for country in countries {
+            if city.parentId == country.id {
+                result.append(city.name)
+            }
+        }
+    }
+    
+    print(result)
+}
+
+searching()
+
+//Given a 2D array, where there are 0s and 1s (1 representing island) count how many islands are there, for example, [[0,1,1], [1,0,0], [0,1,0]] there are 3 islands there (because in the first row 2 of 1s are connected so they created a bigger island.
+
+
+let islands = [
+    [0,2,0,0],
+    [1,0,0],
+    [0,1,0]
+]
+
+func findIslands() {
+    let a = islands.filter{ $0.contains(1) }
+    print(a.count)
+}
+
+findIslands()
+
+
+//struct Business {
+//    let id: Int
+//    let reviewCount: Int
+//}
+//
+//func mergeSortedBusinesses(trendy: [Business], favorite: [Business]) -> [Business] {
+//    // TODO: COMPLETE ME
+//
+//    return Array(trendy + favorite).sorted(by: $0.reviewCount > $1.reviewCount)
+//
+//}
+
+
+
+
 //: [Next](@next)
 

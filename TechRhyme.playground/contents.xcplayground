@@ -8,5 +8,6 @@
         <page name='Algorithm'/>
         <page name='Search'/>
         <page name='BinaryTree'/>
+        <page name='DynamicProgramming'/>
     </pages>
 </playground>

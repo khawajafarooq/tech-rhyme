@@ -85,9 +85,21 @@ func fizzbuzz(_ input: Int) -> String {
     }
 }
 
-for i in 1...100 {
-    print(fizzbuzz(i))
+func fizzbuzzRecursion(_ a: [Int]) {
+    
+    guard a.count > 0 else { return }
+    var array = a
+    let value = array.removeFirst()
+    print(fizzbuzz(value))
+    fizzbuzzRecursion(array)
 }
+
+
+//for i in 1...100 {
+//    print(fizzbuzz(i))
+//}
+
+fizzbuzzRecursion(Array(1...100))
 
 //func count(of word: String, in input: String) -> Int {
 //
@@ -110,6 +122,75 @@ for i in 1...100 {
 //    return counter
 //}
 
-count(of: "hello", in: "abcahellomhellooi0")
+//count(of: "hello", in: "abcahellomhellooi0")
+
+let testScores: [Int] = [100, 80]
+func calculate() -> Character {
+    
+    let avgScore = testScores.reduce(0, +) / testScores.count
+    
+    switch true {
+    case avgScore >= 90 && avgScore <= 100: return "O"
+    case avgScore >= 80 && avgScore < 90: return "E"
+    case avgScore >= 70 && avgScore < 80: return "A"
+    case avgScore >= 55 && avgScore < 70: return "P"
+    case avgScore >= 40 && avgScore < 55: return "D"
+    default: return "T"
+    }
+}
+
+calculate()
+
+
+let q1 = [
+    [1, 2, 100],
+    [2, 5, 100],
+    [3, 4, 100]
+    
+]
+
+let q2 = [
+    [2, 3, 603],
+    [1, 1, 286],
+    [4, 4, 882],
+]
+
+var q3: [[Int]] = [[]]
+for i in 0...100000 {
+    let item = i % 2 == 0 ? q1[0] : q2[2]
+    q3.append(item)
+}
+
+func arrayManipulation(n: Int, queries: [[Int]]) -> Int {
+    
+    var zeroArray = Array(repeating: 0, count: n)
+    
+    var max = 0
+    
+    for query in queries {
+        let a = query[0] - 1 // index
+        let b = query[1] - 1 // index
+        let k = query[2]
+        
+        guard a >= 0 && a < n else { return -1 }
+        guard b >= 0 && b < n else { return -1 }
+        guard a <= b else { return -1 }
+        
+        for i in a...b {
+            zeroArray[i] += k
+            
+            if max < zeroArray[i] {
+                max = zeroArray[i]
+            }
+        }
+    }
+    
+    return max
+}
+
+arrayManipulation(n: 10000, queries: q3)
+
+
+
 //: [Next](@next)
 
